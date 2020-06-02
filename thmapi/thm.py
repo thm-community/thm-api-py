@@ -55,3 +55,15 @@ class THM(object):
         """
 
         return http_get(self.session, f'{root_url}/api/leaderboards')['topUsersMonthly']
+
+    #
+    # Team
+    #
+    def get_teams(self) -> list:
+        """
+        Returns all teams
+
+        :return: List containing all teams
+        """
+
+        return http_get(self.session, f'{root_url}/api/all-teams')
