@@ -245,7 +245,7 @@ class THM(object):
         :return: Room votes
         """
 
-        return http_get(self.session, f'{root_url}/api/get-votes/{room_code}') #/api/weekly-challenge-rooms
+        return http_get(self.session, f'{root_url}/api/get-votes/{room_code}')
 
     def room_weekly_challenges(self) -> list:
         """
