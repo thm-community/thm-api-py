@@ -1,3 +1,4 @@
+from .auth import __THMAuth
 from .koth import __THMKoth
 from .leaderboard import __THMLeaderboard
 from .room import __THMRoom
@@ -8,6 +9,7 @@ import requests
 
 
 class THM(
+    __THMAuth,
     __THMStats,
     __THMLeaderboard,
     __THMTeam,
@@ -28,7 +30,8 @@ class THM(
         """
 
         self.session = requests.Session()
+        self.authenticated = False
 
-        # if (credentials is not None) and (type(credentials) == dict):
-        #     if ('username' in credentials) and ('password' in credentials):
-        #         self.__login(credentials)
+        if (credentials is not None) and (type(credentials) == dict):
+            if ('username' in credentials) and ('password' in credentials):
+                self.login(credentials)
