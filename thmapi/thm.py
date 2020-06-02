@@ -255,3 +255,21 @@ class THM(object):
         """
 
         return http_get(self.session, f'{root_url}/api/weekly-challenge-rooms')
+
+    # LIKELY TO CHANGE
+    # def room_hacktivities(self, query='null', order_by='most-popular', difficulty='all', type='all'):
+    #     """
+    #
+    #
+    #     :param query: Query string for looking at description/tags
+    #     :param order_by: Order by: most-users, most-popular, newest
+    #     :param difficulty: Difficulty: easy, medium, hard
+    #     :param type: Room type: challenge, walkthrough
+    #     :return: Room list
+    #     """
+    #
+    #     # order_by: most-users, most-popular, newest
+    #     # difficulty: easy, medium, hard
+    #     # type: challenge, walkthrough
+    #
+    #     return http_get(self.session, f'{root_url}/api/hacktivities/{query}/all/{order_by}/{difficulty}/{type}')
