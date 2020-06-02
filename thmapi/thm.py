@@ -40,3 +40,41 @@ class THM(object):
                 raise Exception('HTTP Response was not 200')
         except Exception as err:
             raise err
+
+    def get_leaderboard(self) -> list:
+        """
+        Returns the top 50 users from the all-time leaderboard
+
+        :return: List containing top 50 users
+        """
+
+        path = f'{root_url}/api/leaderboards'
+
+        try:
+            r = self.session.get(path)
+
+            if r.status_code == 200:
+                return r.json()['topUsers']
+            else:
+                raise Exception('HTTP Response was not 200')
+        except Exception as err:
+            raise err
+
+    def get_monthly_leaderboard(self) -> list:
+        """
+        Returns the top 50 users from the monthly leaderboard
+
+        :return: List containing top 50 users
+        """
+
+        path = f'{root_url}/api/leaderboards'
+
+        try:
+            r = self.session.get(path)
+
+            if r.status_code == 200:
+                return r.json()['topUsersMonthly']
+            else:
+                raise Exception('HTTP Response was not 200')
+        except Exception as err:
+            raise err
