@@ -23,6 +23,9 @@ class THM(object):
         #     if ('username' in credentials) and ('password' in credentials):
         #         self.__login(credentials)
 
+    #
+    # Statistics
+    #
     def get_stats(self) -> dict:
         """
         Returns public and cloneable room count and current user count
@@ -32,6 +35,9 @@ class THM(object):
 
         return http_get(self.session, f'{root_url}/api/getstats')
 
+    #
+    # Leaderboard
+    #
     def get_leaderboard(self) -> list:
         """
         Returns the top 50 users from the all-time leaderboard
