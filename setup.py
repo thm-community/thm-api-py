@@ -20,5 +20,5 @@ setuptools.setup(
         "Development Status :: 3 - Alpha",
         "Topic :: Internet :: WWW/HTTP"
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.8',
 )
