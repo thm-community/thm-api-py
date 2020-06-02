@@ -27,7 +27,10 @@ def http_get(session, path, res_format="json", has_success=False):
                     if res['success']:
                         return res
                     else:
-                        raise Exception(f'API Error: {res["message"]}')
+                        if 'message' in res:
+                            raise Exception(f'API Error: {res["message"]}')
+                        else:
+                            raise Exception(f'API Error (no reason given)')
                 else:
                     return r.json()
             else:
