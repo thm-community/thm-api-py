@@ -6,6 +6,13 @@ csrf_regex = re.compile('<input type="hidden" name="_csrf" value="(.{36})">')
 
 class __THMAuth(object):
     def login(self, credentials):
+        """
+        Log in to THM
+
+        :param credentials: Login and password
+        :return: null
+        """
+
         initial = http_get(self.session, '/login', res_format='')
         csrf_token = csrf_regex.search(initial).group(1)
 
