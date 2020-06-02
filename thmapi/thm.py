@@ -22,8 +22,6 @@ class THM(object):
         #     if ('username' in credentials) and ('password' in credentials):
         #         self.__login(credentials)
 
-        print(self.get_stats())
-
     def get_stats(self) -> dict:
         """
         Returns public and cloneable room count and current user count
