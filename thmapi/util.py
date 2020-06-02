@@ -1,5 +1,7 @@
 import requests
 
+root_url = 'https://tryhackme.com'
+
 
 def http_get(session, path, res_format="json", has_success=False):
     """
@@ -17,7 +19,7 @@ def http_get(session, path, res_format="json", has_success=False):
     """
 
     try:
-        r = session.get(path)
+        r = session.get(f'{root_url}{path}')
 
         if r.status_code == 200:
             if res_format == 'json':
@@ -30,7 +32,7 @@ def http_get(session, path, res_format="json", has_success=False):
                         if 'message' in res:
                             raise Exception(f'API Error: {res["message"]}')
                         else:
-                            raise Exception(f'API Error (no reason given)')
+                            raise Exception(f'API Error (no reason given)\nResponse: {res}')
                 else:
                     return r.json()
             else:
