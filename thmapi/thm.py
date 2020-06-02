@@ -1,3 +1,4 @@
+from .util import http_get
 import requests
 
 root_url = 'https://tryhackme.com'
@@ -29,17 +30,7 @@ class THM(object):
         :return: Dict containing mentioned values
         """
 
-        path = f'{root_url}/api/getstats'
-
-        try:
-            r = self.session.get(path)
-
-            if r.status_code == 200:
-                return r.json()
-            else:
-                raise Exception('HTTP Response was not 200')
-        except Exception as err:
-            raise err
+        return http_get(self.session, f'{root_url}/api/getstats')
 
     def get_leaderboard(self) -> list:
         """
@@ -48,17 +39,7 @@ class THM(object):
         :return: List containing top 50 users
         """
 
-        path = f'{root_url}/api/leaderboards'
-
-        try:
-            r = self.session.get(path)
-
-            if r.status_code == 200:
-                return r.json()['topUsers']
-            else:
-                raise Exception('HTTP Response was not 200')
-        except Exception as err:
-            raise err
+        return http_get(self.session, f'{root_url}/api/leaderboards')['topUsers']
 
     def get_monthly_leaderboard(self) -> list:
         """
@@ -67,14 +48,4 @@ class THM(object):
         :return: List containing top 50 users
         """
 
-        path = f'{root_url}/api/leaderboards'
-
-        try:
-            r = self.session.get(path)
-
-            if r.status_code == 200:
-                return r.json()['topUsersMonthly']
-            else:
-                raise Exception('HTTP Response was not 200')
-        except Exception as err:
-            raise err
+        return http_get(self.session, f'{root_url}/api/leaderboards')['topUsersMonthly']
