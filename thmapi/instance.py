@@ -14,6 +14,27 @@ class __THMInstance(object):
 
         return http_get(self.session, '/api/running-instances')
 
+    def instance_deploy(self, room_code, vm_id) -> dict:
+        """
+        AUTHENTICATED
+        Deploys the selected VM in the room
+
+        :param room_code: Room code to renew the VM in
+        :param vm_id: VM id
+        """
+        if not self.authenticated:
+            raise Exception("Not authenticated")
+
+        csrf_token = fetch_pattern(self.session, f'/room/{room_code}', 'csrf-script')
+
+        return http_post(
+            self.session,
+            '/deploy',
+            data={'roomCode': room_code, 'id': vm_id},
+            headers={'csrf-token': csrf_token},
+            has_success=True
+        )
+
     def instance_renew(self, room_code) -> float:
         """
         AUTHENTICATED

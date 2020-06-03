@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="thmapi",
-    version="0.7.0",
+    version="0.7.1",
     author="Szymon Borecki",
     author_email="self@szymex.pw",
     description="THM public API wrapper",
