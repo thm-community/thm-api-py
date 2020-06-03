@@ -1,9 +1,12 @@
 import requests
+import re
 
-root_url = 'https://tryhackme.com'
+__root_url = 'https://tryhackme.com'
+__csrf_script_regex = re.compile("const csrfToken='(.{36})';")
+__csrf_input_regex = re.compile('<input type="hidden" name="_csrf" value="(.{36})">')
 
 
-def http_get(session, path, res_format="json", has_success=False):
+def http_get(session, path, res_format="json", has_success=False, headers={}):
     """
     HTTP GET call wrapper
 
@@ -15,11 +18,13 @@ def http_get(session, path, res_format="json", has_success=False):
     :param res_format: Response format
     :type has_success: bool
     :param has_success: Does the request have a "success" field
+    :type headers: dict
+    :param headers: Additional headers
     :return: Return object
     """
 
     try:
-        r = session.get(f'{root_url}{path}')
+        r = session.get(f'{__root_url}{path}', headers=headers)
 
         if r.status_code == 200:
             if res_format == 'json':
@@ -43,7 +48,27 @@ def http_get(session, path, res_format="json", has_success=False):
         raise err
 
 
-def http_post(session, path, data, res_format="json", has_success=False):
+def fetch_pattern(session, path, pattern):
+    """
+    Fetches a pattern from a raw HTTP response
+
+    :param session: Session
+    :param path: HTTP Path
+    :param pattern: Compiled regular expression ID (csrf-input/csrf-script)
+    :return: String matching group 1
+    """
+
+    r = http_get(session, path, res_format='')
+
+    if pattern == 'csrf-input':
+        return __csrf_input_regex.search(r).group(1)
+    elif pattern == 'csrf-script':
+        return __csrf_script_regex.search(r).group(1)
+    else:
+        return ""
+
+
+def http_post(session, path, data, res_format="json", has_success=False, headers={}):
     """
     HTTP POST call wrapper
 
@@ -57,11 +82,13 @@ def http_post(session, path, data, res_format="json", has_success=False):
     :param res_format: Response format
     :type has_success: bool
     :param has_success: Does the request have a "success" field
+    :type headers: dict
+    :param headers: Additional headers
     :return: Return object
     """
 
     try:
-        r = session.post(f'{root_url}{path}', json=data)
+        r = session.post(f'{__root_url}{path}', json=data, headers=headers)
 
         if r.status_code == 200:
             if res_format == 'json':
@@ -80,6 +107,6 @@ def http_post(session, path, data, res_format="json", has_success=False):
             else:
                 return r.content.decode('utf-8')
         else:
-            raise Exception('HTTP Response was not 200')
+            raise Exception(f'HTTP Response was not 200 (got {r.status_code})')
     except Exception as err:
         raise err
