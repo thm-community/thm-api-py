@@ -79,3 +79,34 @@ class __THMRoom(object):
     #     # type: challenge, walkthrough
     #
     #     return http_get(self.session, f'{root_url}/api/hacktivities/{query}/all/{order_by}/{difficulty}/{type}')
+
+    def room_tasks(self, room_code) -> list:
+        """
+        Gets the list of tasks+questions for a specific room
+
+        :param room_code: Room code
+        :return: List of tasks with their questions (and additional info when authenticated)
+        """
+
+        return http_get(self.session, f'/api/tasks/{room_code}')['data']
+
+    def room_issues(self, room_code) -> list:
+        """
+        Gets the list of issues for a specific room
+
+        :param room_code: Room code
+        :return: List of issues
+        """
+
+        return http_get(self.session, f'/api/get-issues/{room_code}')['data']
+
+    def room_progress(self, *room_codes) -> list:
+        """
+        Gets the list of issues for a specific room
+
+        :type room_codes: list
+        :param room_codes: List of room codes
+        :return: List of issues
+        """
+
+        return http_post(self.session, f'/api/room-percentages', data={'rooms': room_codes})
