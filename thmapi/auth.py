@@ -1,7 +1,4 @@
 from .util import *
-import re
-
-csrf_regex = re.compile('<input type="hidden" name="_csrf" value="(.{36})">')
 
 
 class __THMAuth(object):
@@ -13,8 +10,7 @@ class __THMAuth(object):
         :return: null
         """
 
-        initial = http_get(self.session, '/login', res_format='')
-        csrf_token = csrf_regex.search(initial).group(1)
+        csrf_token = fetch_pattern(self.session, '/login', 'csrf-input')
 
         data = {
             'email': credentials['username'],
