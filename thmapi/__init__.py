@@ -1,4 +1,5 @@
 from .auth import __THMAuth
+from .instance import __THMInstance
 from .koth import __THMKoth
 from .leaderboard import __THMLeaderboard
 from .room import __THMRoom
@@ -15,7 +16,8 @@ class THM(
     __THMTeam,
     __THMUser,
     __THMKoth,
-    __THMRoom
+    __THMRoom,
+    __THMInstance
 ):
     """
     TryHackMe API Wrapper
