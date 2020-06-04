@@ -91,3 +91,13 @@ class __THMUser(object):
         """
 
         return http_get(self.session, f'/api/usersRank/{username}')
+
+    def user_badge_info(self, *badges) -> list:
+        """
+        Returns a list of badge objects
+
+        :param badges: Badge list
+        :return:
+        """
+
+        return http_post(self.session, '/api/get-specific-badges', data={'badges': badges})
