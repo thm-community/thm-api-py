@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="thmapi",
-    version="0.7.4",
+    version="0.7.5",
     author="Szymon Borecki",
     author_email="self@szymex.pw",
     description="THM public API wrapper",
@@ -21,4 +21,11 @@ setuptools.setup(
         "Topic :: Internet :: WWW/HTTP"
     ],
     python_requires='>=3.8',
+    install_requires=[
+        "requests",
+        "chardet>=3.0.2,<4",
+        "idna>=2.5,<3",
+        "urllib3>=1.21.1,<1.26,!=1.25.0,!=1.25.1",
+        "certifi>=2017.4.17"
+    ],
 )
