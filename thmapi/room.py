@@ -110,3 +110,26 @@ class __THMRoom(object):
         """
 
         return http_post(self.session, f'/api/room-percentages', data={'rooms': room_codes})
+
+    def room_answer_question(self, room_code, task_no, question_no, answer):
+        """
+        Answers a question in a room
+
+        :param room_code: Room code
+        :param task_no: Task number
+        :param question_no: Question number
+        :param answer: Answer
+        :return:
+        """
+        if not self.authenticated:
+            raise Exception("Not authenticated")
+
+        csrf_token = fetch_pattern(self.session, f'/room/{room_code}', 'csrf-script')
+
+        return http_post(
+            self.session,
+            f'/api/{room_code}/answer',
+            data={'taskNo': task_no, 'questionNo': question_no, 'answer': answer},
+            headers={'csrf-token': csrf_token},
+            has_success=True
+        )
