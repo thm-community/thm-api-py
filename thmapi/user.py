@@ -22,16 +22,6 @@ class __THMUser(object):
 
         return http_get(self.session, f'/api/created-rooms/{username}', has_success=True)['rooms']
 
-    def user_completed_room_count(self, username) -> int:
-        """
-        Gets the amount of completed rooms by a user
-
-        :param username: Username to check
-        :return:
-        """
-
-        return http_get(self.session, f'/api/roomscompleted/{username}')['completed']
-
     def user_all_completed_rooms(self, username) -> list:
         """
         Gets all rooms completed by a user
