@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="thmapi",
-    version="0.9.2",
+    version="0.9.3",
     author="Szymon Borecki",
     author_email="self@szymex.pw",
     description="THM public API wrapper",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/szymex73/py-thmapi",
+    url="https://github.com/thm-community/py-thmapi",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
