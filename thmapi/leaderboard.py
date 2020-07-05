@@ -2,20 +2,24 @@ from .util import *
 
 
 class __THMLeaderboard(object):
-    def get_leaderboard(self) -> list:
+    def get_leaderboard(self, monthly=True, country=None) -> list:
         """
         Returns the top 50 users from the all-time leaderboard
 
+        :param monthly Switch for the monthly data
+        :type monthly: bool
+        :param country: Country code for country leaderboards
+        :type country: str
         :return: List containing top 50 users
         """
 
-        return http_get(self.session, '/api/leaderboards')['topUsers']
+        queries = []
+        if monthly:
+            queries.append('type=monthly')
 
-    def get_monthly_leaderboard(self) -> list:
-        """
-        Returns the top 50 users from the monthly leaderboard
+        if country:
+            queries.append(f'country={country}')
 
-        :return: List containing top 50 users
-        """
+        query = '?' + '&'.join(queries)
 
-        return http_get(self.session, '/api/leaderboards')['topUsersMonthly']
+        return http_get(self.session, '/api/leaderboards' + query)['ranks']
