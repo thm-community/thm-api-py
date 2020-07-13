@@ -19,7 +19,7 @@ class __THMRoom(object):
         :return: List of newest rooms
         """
 
-        return http_get(self.session, '/api/newrooms')
+        return http_get(self.session, '/api/new-rooms')
 
     def room_graph_data(self, room_code, user_count=10) -> list:
         """
