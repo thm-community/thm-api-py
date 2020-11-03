@@ -1,4 +1,4 @@
-# thmapi
+# thm-api-py
 [![PyPI version](https://badge.fury.io/py/thmapi.svg)](https://badge.fury.io/py/thmapi)  
 Python wrapper for TryHackMe public API  
 Officially sponsored and affiliated with [TryHackMe](https://tryhackme.com/)
