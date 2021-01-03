@@ -35,5 +35,5 @@ class THM(
         self.authenticated = False
 
         if (credentials is not None) and (type(credentials) == dict):
-            if ('username' in credentials) and ('password' in credentials) or 'cookie' in credentials:
+            if ('username' in credentials) and ('password' in credentials) or 'session' in credentials:
                 self.login(credentials)
