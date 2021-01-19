@@ -12,7 +12,7 @@ class __THMRoom(object):
         :return: Room data
         """
 
-        return http_get(self.session, f'/api/room-details?codes={room_code}', has_success=True)[room_code]
+        return http_get(self.session, f'/api/room-details?codes={room_code}')[room_code]
 
     def room_details_multiple(self, room_codes: List[str]) -> dict:
         """
@@ -22,7 +22,7 @@ class __THMRoom(object):
         :return: Map of room data (mapped as {code: data})
         """
 
-        return http_get(self.session, f'/api/room-details?codes={",".join(room_codes)}', has_success=True)
+        return http_get(self.session, f'/api/room-details?codes={",".join(room_codes)}')
 
     def room_new_rooms(self) -> list:
         """
