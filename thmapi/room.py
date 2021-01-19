@@ -1,8 +1,10 @@
+from typing import List
+
 from .util import *
 
 
 class __THMRoom(object):
-    def room_details(self, room_code) -> dict:
+    def room_details(self, room_code: str) -> dict:
         """
         Gets details of a specific room
 
@@ -10,7 +12,17 @@ class __THMRoom(object):
         :return: Room data
         """
 
-        return http_get(self.session, f'/api/room/{room_code}', has_success=True)
+        return http_get(self.session, f'/api/room-details?codes={room_code}', has_success=True)[room_code]
+
+    def room_details_multiple(self, room_codes: List[str]) -> dict:
+        """
+        Gets details of a specific room
+
+        :param room_codes: List of room codes
+        :return: Map of room data (mapped as {code: data})
+        """
+
+        return http_get(self.session, f'/api/room-details?codes={",".join(room_codes)}', has_success=True)
 
     def room_new_rooms(self) -> list:
         """
